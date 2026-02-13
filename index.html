@@ -359,6 +359,23 @@ main{ flex:1 0 auto; }
   z-index:1;
 }
 
+
+/* --- EQ zone tweak: keep out of play button area, higher movement --- */
+.eq-bg{
+  left:56px;          /* exclude play button zone */
+  right:96px;         /* exclude time zone on the right */
+  top:44px;           /* keep mostly in lower half */
+  bottom:10px;
+  inset:auto;
+  align-items:flex-end;
+  opacity:.28;
+  gap:7px;
+}
+.eq-bar{
+  min-width:5px;
+  height:20%;
+}
+
 </style>
 </head>
 <body>
@@ -631,7 +648,7 @@ loadVol();
   function drawFallback(){
     fallbackTick += 0.04;
     for(let i=0;i<bars.length;i++){
-      const v = 0.18 + Math.abs(Math.sin(fallbackTick + i*0.35))*0.9;
+      const v = 0.22 + Math.abs(Math.sin(fallbackTick + i*0.35))*1.35;
       bars[i].style.transform = `scaleY(${v.toFixed(3)})`;
     }
   }
@@ -652,8 +669,8 @@ loadVol();
         const idx = i * step;
         const raw = data[idx] || 0;
         const n = raw / 255;
-        const v = 0.14 + Math.pow(n, 0.85) * 1.22;
-        bars[i].style.transform = `scaleY(${Math.min(1.35, v).toFixed(3)})`;
+        const v = 0.22 + Math.pow(n, 0.78) * 1.75;
+        bars[i].style.transform = `scaleY(${Math.min(2.0, v).toFixed(3)})`;
       }
     }else{
       drawFallback();
@@ -685,4 +702,3 @@ loadVol();
 </script>
 
 </body>
-</html>
