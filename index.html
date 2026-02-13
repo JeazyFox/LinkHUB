@@ -9,19 +9,19 @@
   <meta property="og:description" content="Все мои ссылки в одном месте." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#090a0f" />
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/pic/icon.png" />
-  <link rel="shortcut icon" href="./assets/pic/icon.png" />
-  <link rel="apple-touch-icon" href="./assets/pic/icon.png" />
-  <link rel="stylesheet" href="./assets/style.css">
-  <script src="./assets/script.js" defer></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/pic/icon.png" />
+  <link rel="shortcut icon" href="assets/pic/icon.png" />
+  <link rel="apple-touch-icon" href="assets/pic/icon.png" />
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/script.js" defer></script>
 </head>
 
 <body>
-  <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню">|||</button>
+  <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню">☰</button>
   <div class="backdrop" id="backdrop"></div>
   <aside class="sidebar" id="sidebar">
     <div class="side-head">
-      <img class="side-avatar" src="./assets/pic/avatar.jpg" alt="Jeazy Fox" />
+      <img class="side-avatar" src="assets/pic/avatar.jpg" alt="Jeazy Fox" />
       <div><div style="font-weight:700">Jeazy Fox</div><div style="font-size:.86rem;color:var(--muted)">Навигация</div></div>
     </div>
     <nav class="menu">
@@ -34,7 +34,7 @@
     <section class="screen active" id="screen-home">
       <section class="profile">
         <div class="profile-main">
-          <img class="avatar" src="./assets/pic/avatar.jpg" alt="Аватар Jeazy Fox" />
+          <img class="avatar" src="assets/pic/avatar.jpg" alt="Аватар Jeazy Fox" />
           <div><h1 class="name">Jeazy Fox</h1><p class="tag">Контент-мейкер • YouTube / Twitch • Furry</p></div>
         </div>
         <a class="support-btn" href="https://dalink.to/jeazythefox" target="_blank" rel="noopener noreferrer">❤ Поддержать</a>
@@ -42,13 +42,13 @@
       <p class="bio">Привет! Я Jeazy Fox. Тут собраны все мои основные ссылки: ролики, стримы, соцсети и проекты.</p>
       <section class="links">
         <a class="link" href="https://www.youtube.com/@JeazyTheFox" target="_blank" rel="noopener noreferrer">
-          <div class="left"><img class="icon" src="https://yt3.googleusercontent.com/-tAoT00YfgCUg6kiasBOcpT6Lz6WpdNpo0VDoM7ib9CxpiO_aLxFq4SMBW9F3u6YH2SvoBzFWA=s160-c-k-c0x00ffffff-no-rj" alt=""><div><div style="font-weight:700">YouTube</div><div class="sub">@JeazyTheFox</div></div></div><div>↗</div>
+          <div class="left"><img class="icon" src="https://www.gstatic.com/youtube/img/branding/favicon/favicon_144x144.png" alt=""><div><div style="font-weight:700">YouTube</div><div class="sub">@JeazyTheFox</div></div></div><div>↗</div>
         </a>
         <a class="link" href="https://www.twitch.tv/jeazy_the_fox" target="_blank" rel="noopener noreferrer">
           <div class="left"><img class="icon" src="https://static-cdn.jtvnw.net/jtv_user_pictures/4e998103-fb69-416b-9290-1522a939c593-profile_image-70x70.png" alt=""><div><div style="font-weight:700">Twitch</div><div class="sub">Стримы и общение</div></div></div><div>↗</div>
         </a>
         <a class="link" href="https://t.me/jeazy_fox_chanel" target="_blank" rel="noopener noreferrer">
-          <div class="left"><img class="icon" src="./assets/pic/avatar.jpg" alt=""><div><div style="font-weight:700">Telegram</div><div class="sub">Новости, анонсы, посты</div></div></div><div>↗</div>
+          <div class="left"><img class="icon" src="assets/pic/avatar.jpg" alt=""><div><div style="font-weight:700">Telegram</div><div class="sub">Новости, анонсы, посты</div></div></div><div>↗</div>
         </a>
       </section>
     </section>
@@ -56,48 +56,44 @@
     <section class="screen" id="screen-news">
       <section class="profile">
         <div class="profile-main">
-          <img class="avatar" src="./assets/pic/avatar.jpg" alt="Аватар Jeazy Fox" />
+          <img class="avatar" src="assets/pic/avatar.jpg" alt="Аватар Jeazy Fox" />
           <div><h1 class="name">Новости</h1><p class="tag">Лента обновлений и анонсов</p></div>
         </div>
         <a class="support-btn" href="https://dalink.to/jeazythefox" target="_blank" rel="noopener noreferrer">❤ Поддержать</a>
       </section>
       <div class="news-list" id="newsList"></div>
       <div class="news-empty" id="newsEmpty" style="display:none;">Пока новостей нет. Добавь записи в <code>news.json</code>.</div>
-      <div class="news-error" id="newsError" style="display:none;">Не удалось загрузить <code>news.json</code>. Проверь путь и JSON-формат.</div>
+      <div class="news-error" id="newsError" style="display:none;">Не удалось загрузить новости. Убедись, что файл <code>assets/news.json</code> существует и доступен через сервер.</div>
     </section>
 
-    
-<section class="audio-card">
-  <div class="eq-bg" id="eqBg" aria-hidden="true"></div>
-  <div class="audio-head">
-    <div class="audio-meta">
-      <div class="audio-title" id="trackTitle">supermoon</div>
-    </div>
-    <div class="audio-inline-vol">
-      <span class="audio-vol-label" aria-hidden="true">🔊</span>
-      <input id="vol" class="audio-vol" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume" />
-    </div>
-  </div>
+    <section class="audio-card">
+      <div class="eq-bg" id="eqBg" aria-hidden="true"></div>
+      <div class="audio-head">
+        <div class="audio-meta">
+          <div class="audio-title" id="trackTitle">supermoon</div>
+        </div>
+        <div class="audio-inline-vol">
+          <span class="audio-vol-label" aria-hidden="true">🔊</span>
+          <input id="vol" class="audio-vol" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume" />
+        </div>
+      </div>
 
-  <div class="audio-row">
-    <button class="audio-btn" id="playBtn" aria-label="Play/Pause">
-      <svg id="iconPlay" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72A1 1 0 0 0 9.57 19.7l10.12-6.86a1 1 0 0 0 0-1.66L9.57 4.3A1 1 0 0 0 8 5.14Z"/></svg>
-      <svg id="iconPause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none"><path d="M7 5a1 1 0 0 1 1 1v12a1 1 0 1 1-2 0V6a1 1 0 0 1 1-1Zm10 0a1 1 0 0 1 1 1v12a1 1 0 1 1-2 0V6a1 1 0 0 1 1-1Z"/></svg>
-    </button>
+      <div class="audio-row">
+        <button class="audio-btn" id="playBtn" aria-label="Play/Pause">
+          <svg id="iconPlay" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72A1 1 0 0 0 9.57 19.7l10.12-6.86a1 1 0 0 0 0-1.66L9.57 4.3A1 1 0 0 0 8 5.14Z"/></svg>
+          <svg id="iconPause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none"><path d="M7 5a1 1 0 0 1 1 1v12a1 1 0 1 1-2 0V6a1 1 0 0 1 1-1Zm10 0a1 1 0 0 1 1 1v12a1 1 0 1 1-2 0V6a1 1 0 0 1 1-1Z"/></svg>
+        </button>
 
-    <input id="seek" class="audio-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Progress" />
-    <div id="time" class="audio-time">00:00 / 00:00</div>
-  </div>
-<audio id="player" preload="metadata">
-    <source src="./assets/music/supermoon.mp3" type="audio/mpeg" />
-    Ваш браузер не поддерживает аудио.
-  </audio>
-</section>
-
+        <input id="seek" class="audio-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Progress" />
+        <div id="time" class="audio-time">00:00 / 00:00</div>
+      </div>
+      <audio id="player" preload="metadata" crossorigin="anonymous">
+        <source src="assets/music/supermoon.mp3" type="audio/mpeg" />
+        Ваш браузер не поддерживает аудио.
+      </audio>
+    </section>
 
     <footer>© <span id="year"></span> Jeazy Fox. All barks reserved.</footer>
   </main>
-
-
 </body>
 </html>
