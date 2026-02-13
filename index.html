@@ -359,6 +359,18 @@ main{ flex:1 0 auto; }
   z-index:1;
 }
 
+
+/* EQ max-height boost */
+.eq-bg{
+  top:8px !important;
+  bottom:8px !important;
+  align-items:flex-end;
+}
+.eq-bar{
+  height:28% !important;   /* baseline taller */
+  transform-origin:bottom center;
+}
+
 </style>
 </head>
 <body>
@@ -631,7 +643,7 @@ loadVol();
   function drawFallback(){
     fallbackTick += 0.04;
     for(let i=0;i<bars.length;i++){
-      const v = 0.28 + Math.abs(Math.sin(fallbackTick + i*0.35))*1.45;
+      const v = 0.35 + Math.abs(Math.sin(fallbackTick + i*0.35))*2.35;
       bars[i].style.transform = `scaleY(${v.toFixed(3)})`;
     }
   }
@@ -652,8 +664,8 @@ loadVol();
         const idx = i * step;
         const raw = data[idx] || 0;
         const n = raw / 255;
-        const v = 0.24 + Math.pow(n, 0.72) * 2.15;
-        bars[i].style.transform = `scaleY(${Math.min(2.4, v).toFixed(3)})`;
+        const v = 0.35 + Math.pow(n, 0.62) * 3.05;
+        bars[i].style.transform = `scaleY(${Math.min(3.6, v).toFixed(3)})`;
       }
     }else{
       drawFallback();
