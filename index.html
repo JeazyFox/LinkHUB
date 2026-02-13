@@ -298,6 +298,67 @@ footer{
   user-select:none;
 }
 
+
+/* Sticky footer layout */
+html, body{
+  height:100%;
+}
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+.container, main, .wrapper, .content{
+  /* harmless if class doesn't exist; real push handled below */
+}
+footer{
+  margin-top:auto !important;   /* pushes footer to bottom */
+  margin-bottom:10px;
+}
+
+
+/* Let primary content area expand so footer stays at bottom */
+main{ flex:1 0 auto; }
+.container{ flex:1 0 auto; }
+.wrapper{ flex:1 0 auto; }
+.wrap{ flex:1 0 auto; }
+#app{ flex:1 0 auto; }
+
+
+/* --- Audio card background visualizer --- */
+.audio-card{
+  position:relative;
+  overflow:hidden;
+}
+.eq-bg{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:6px;
+  padding:10px 12px;
+  opacity:.22;
+  z-index:0;
+}
+.eq-bar{
+  flex:1 1 auto;
+  min-width:4px;
+  height:16%;
+  border-radius:8px 8px 0 0;
+  background:linear-gradient(180deg, rgba(255,255,255,.45), rgba(240,54,89,.95));
+  transform-origin:bottom center;
+  transform:scaleY(.25);
+  filter:blur(.1px);
+}
+
+/* keep player content above visualizer */
+.audio-card > *:not(.eq-bg){
+  position:relative;
+  z-index:1;
+}
+
 </style>
 </head>
 <body>
@@ -323,7 +384,7 @@ footer{
         </div>
         <a class="support-btn" href="https://dalink.to/jeazythefox" target="_blank" rel="noopener noreferrer">❤ Поддержать</a>
       </section>
-      <p class="bio">Привет! Я Jeazy Fox. Тут БУДУТ собраны все мои основные ссылки: ролики, стримы, соцсети и проекты.</p>
+      <p class="bio">Привет! Я Jeazy Fox. Тут собраны все мои основные ссылки: ролики, стримы, соцсети и проекты.</p>
       <section class="links">
         <a class="link" href="https://www.youtube.com/@JeazyTheFox" target="_blank" rel="noopener noreferrer">
           <div class="left"><img class="icon" src="https://yt3.googleusercontent.com/-tAoT00YfgCUg6kiasBOcpT6Lz6WpdNpo0VDoM7ib9CxpiO_aLxFq4SMBW9F3u6YH2SvoBzFWA=s160-c-k-c0x00ffffff-no-rj" alt=""><div><div style="font-weight:700">YouTube</div><div class="sub">@JeazyTheFox</div></div></div><div>↗</div>
@@ -352,6 +413,7 @@ footer{
 
     
 <section class="audio-card">
+  <div class="eq-bg" id="eqBg" aria-hidden="true"></div>
   <div class="audio-head">
     <div class="audio-meta">
       <div class="audio-title" id="trackTitle">supermoon</div>
@@ -528,6 +590,97 @@ loadNews();
 loadVol();
   setIcons();
   setSeekBg();
+})();
+</script>
+
+
+<script>
+(function(){
+  const audio = document.getElementById('player');
+  const eqBg = document.getElementById('eqBg');
+  if(!audio || !eqBg) return;
+
+  // Create bars
+  const BAR_COUNT = 34;
+  for(let i=0;i<BAR_COUNT;i++){
+    const b = document.createElement('span');
+    b.className = 'eq-bar';
+    b.style.opacity = (0.55 + Math.random()*0.45).toFixed(2);
+    eqBg.appendChild(b);
+  }
+  const bars = Array.from(eqBg.children);
+
+  let ctx = null, analyser = null, data = null, source = null;
+  let raf = 0;
+  let fallbackTick = 0;
+
+  function ensureAudioGraph(){
+    if(ctx) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return;
+    ctx = new AC();
+    analyser = ctx.createAnalyser();
+    analyser.fftSize = 256;
+    analyser.smoothingTimeConstant = 0.8;
+    data = new Uint8Array(analyser.frequencyBinCount);
+    source = ctx.createMediaElementSource(audio);
+    source.connect(analyser);
+    analyser.connect(ctx.destination);
+  }
+
+  function drawFallback(){
+    fallbackTick += 0.04;
+    for(let i=0;i<bars.length;i++){
+      const v = 0.18 + Math.abs(Math.sin(fallbackTick + i*0.35))*0.9;
+      bars[i].style.transform = `scaleY(${v.toFixed(3)})`;
+    }
+  }
+
+  function animate(){
+    if(audio.paused){
+      // settle down when paused
+      for(const b of bars) b.style.transform = 'scaleY(.2)';
+      cancelAnimationFrame(raf);
+      raf = 0;
+      return;
+    }
+
+    if(analyser && data){
+      analyser.getByteFrequencyData(data);
+      const step = Math.max(1, Math.floor(data.length / bars.length));
+      for(let i=0;i<bars.length;i++){
+        const idx = i * step;
+        const raw = data[idx] || 0;
+        const n = raw / 255;
+        const v = 0.14 + Math.pow(n, 0.85) * 1.22;
+        bars[i].style.transform = `scaleY(${Math.min(1.35, v).toFixed(3)})`;
+      }
+    }else{
+      drawFallback();
+    }
+
+    raf = requestAnimationFrame(animate);
+  }
+
+  audio.addEventListener('play', async ()=>{
+    try{
+      ensureAudioGraph();
+      if(ctx && ctx.state === 'suspended') await ctx.resume();
+    }catch(e){}
+    if(!raf) animate();
+  });
+
+  audio.addEventListener('pause', ()=>{
+    if(!raf) return;
+    animate(); // lets it settle
+  });
+  audio.addEventListener('ended', ()=>{
+    if(!raf) return;
+    animate();
+  });
+
+  // init calm state
+  for(const b of bars) b.style.transform = 'scaleY(.2)';
 })();
 </script>
 
