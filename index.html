@@ -9,31 +9,213 @@
   <meta property="og:description" content="Все мои ссылки в одном месте." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://placehold.co/1200x630/png?text=Jeazy+Fox+Link+Hub" />
-  <meta name="theme-color" content="#09090c" />
+  <meta name="theme-color" content="#0f0f12" />
 
-    <link rel="stylesheet" href="./styles.css" />
+  <style>
+    :root{
+      --bg: #0b0b10;
+      --bg-soft: #14141c;
+      --card: #181823;
+      --text: #f3f3f7;
+      --muted: #a2a3b3;
+      --line: #2a2b3a;
+      --accent: #ff3b4d;
+      --accent-2: #ff6b78;
+      --radius: 18px;
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+    }
 
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding:0;
+      background:
+        radial-gradient(1200px 700px at 50% -10%, rgba(255,59,77,.12), transparent 60%),
+        radial-gradient(1000px 600px at 90% 0%, rgba(255,107,120,.08), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      min-height:100%;
+    }
+
+    .wrap{
+      width:min(760px, 92vw);
+      margin:28px auto 40px;
+    }
+
+    .profile{
+      background: linear-gradient(180deg, rgba(255,59,77,.09), rgba(255,59,77,0) 35%), var(--bg-soft);
+      border:1px solid var(--line);
+      border-radius: calc(var(--radius) + 4px);
+      box-shadow: var(--shadow);
+      padding:22px;
+      display:flex;
+      gap:16px;
+      align-items:center;
+    }
+
+    .avatar{
+      width:88px;
+      height:88px;
+      border-radius:22px;
+      border:1px solid var(--line);
+      object-fit:cover;
+      flex:0 0 auto;
+      background:#202030;
+    }
+
+    .name{
+      margin:0;
+      font-size:1.45rem;
+      line-height:1.2;
+      letter-spacing:.2px;
+    }
+
+    .tag{
+      margin:.35rem 0 0;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .bio{
+      margin:18px 0 0;
+      color:#d4d5e0;
+      line-height:1.55;
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:14px 16px;
+    }
+
+    .links{
+      margin-top:16px;
+      display:grid;
+      gap:12px;
+      
+    }
+
+    .link{
+      display:flex;
+      align-items:center;
+      justify-content: left;
+      text-decoration:none;
+      color:var(--text);
+      background: linear-gradient(180deg, rgba(255,255,255,.01), transparent), var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+      will-change:transform;
+    }
+
+    .link:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,59,77,.5);
+      background: linear-gradient(180deg, rgba(255,59,77,.10), rgba(255,59,77,.03)), var(--card);
+      box-shadow: 0 8px 22px rgba(255,59,77,.18);
+    }
+
+    .left{
+      display:flex;
+      align-items:left;
+      gap:12px;
+      min-width:0;
+    }
+
+    .icon{
+      width:34px;
+      height:34px;
+      border-radius:11px;
+      display:grid;
+      font-size:15px;
+     
+      color:#747474;
+      border:1px solid;
+      flex:0 0 auto;
+      text-align: left;
+    }
+
+    .txt{
+      min-width:0;
+      margin-left: 15px;
+     
+    
+    }
+
+    .title{
+      font-weight:700;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-top:2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .arrow{
+      color:#c8cada;
+      font-size:1.1rem;
+      margin-left:10px;
+      flex:0 0 auto;
+      margin-left: auto;
+    }
+
+    .social{
+      margin-top:16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .chip{
+      text-decoration:none;
+      color:#e8e9f1;
+      background: var(--bg-soft);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:.9rem;
+      transition: border-color .2s ease, transform .2s ease;
+    }
+
+    .chip:hover{
+      border-color: rgba(255,59,77,.5);
+      transform: translateY(-1px);
+    }
+
+    footer{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:.85rem;
+      text-align:center;
+    }
+
+    @media (max-width:520px){
+      .profile{
+        padding:16px;
+      }
+      .avatar{
+        width:72px;
+        height:72px;
+        border-radius:18px;
+      }
+      .name{font-size:1.25rem}
+      .bio{font-size:.95rem}
+      .link{padding:12px 13px}
+    }
+  </style>
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
-
-  <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-controls="sideDrawer" aria-expanded="false">|||</button>
-
-  <aside class="drawer" id="sideDrawer" aria-hidden="true">
-    <div class="drawer-head">
-      <div class="drawer-title">Меню</div>
-      <button class="drawer-close" id="menuClose" aria-label="Закрыть меню">×</button>
-    </div>
-    <a class="drawer-btn" href="#">Кнопка 1</a>
-    <a class="drawer-btn" href="#">Кнопка 2</a>
-    <a class="drawer-btn" href="#">Кнопка 3</a>
-  </aside>
-
-  <div class="backdrop" id="menuBackdrop"></div>
-
   <main class="wrap">
     <section class="profile">
-      <img class="avatar" src="./assets/pic/vatar-main.jpg" alt="Аватар Jeazy Fox" />
+      <img class="avatar" src="avatar.jpg" alt="Аватар Jeazy Fox" />
       <div>
         <h1 class="name">Jeazy Fox</h1>
         <p class="tag">Контент-мейкер • YouTube / Twitch • Furry</p>
@@ -48,8 +230,8 @@
     <section class="links">
       <a class="link" href="https://www.youtube.com/@JeazyTheFox" target="_blank" rel="noopener noreferrer">
         <div class="left">
-          <div class="icon">YT</div>
-          <div>
+          <img class="icon" src="https://yt3.googleusercontent.com/-tAoT00YfgCUg6kiasBOcpT6Lz6WpdNpo0VDoM7ib9CxpiO_aLxFq4SMBW9F3u6YH2SvoBzFWA=s160-c-k-c0x00ffffff-no-rj" alt="youtube avatar"></div>
+          <div class="txt">
             <div class="title">YouTube</div>
             <div class="sub">@JeazyTheFox</div>
           </div>
@@ -59,8 +241,8 @@
 
       <a class="link" href="https://www.twitch.tv/jeazy_the_fox" target="_blank" rel="noopener noreferrer">
         <div class="left">
-          <div class="icon">TW</div>
-          <div>
+          <img class="icon" src="https://static-cdn.jtvnw.net/jtv_user_pictures/4e998103-fb69-416b-9290-1522a939c593-profile_image-70x70.png" alt="twitch avatar"> </div>
+          <div class="txt">
             <div class="title">Twitch</div>
             <div class="sub">Стримы и общение</div>
           </div>
@@ -70,20 +252,24 @@
 
       <a class="link" href="https://t.me/jeazy_fox_chanel" target="_blank" rel="noopener noreferrer">
         <div class="left">
-          <div class="icon">TG</div>
-          <div>
+          <img class="icon" src="avatar.jpg" alt="avatarTG"></div>
+          <div class="txt">
             <div class="title">Telegram</div>
             <div class="sub">Новости, анонсы, посты</div>
           </div>
         </div>
         <div class="arrow">↗</div>
       </a>
+
+      
+
+      
     </section>
 
     <div class="social">
       <a class="chip" href="mailto:you@example.com">Почта</a>
       <a class="chip" href="https://discord.gg/your_invite" target="_blank" rel="noopener noreferrer">Discord</a>
-      <a class="chip" href="https://dalink.to/jeazythefox" target="_blank" rel="noopener noreferrer">Поддержать</a>
+      <a class="chip" href="https://boosty.to/your_page" target="_blank" rel="noopener noreferrer">Поддержать</a>
     </div>
 
     <footer>
@@ -93,36 +279,7 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    const menuToggle = document.getElementById('menuToggle');
-    const menuClose = document.getElementById('menuClose');
-    const sideDrawer = document.getElementById('sideDrawer');
-    const menuBackdrop = document.getElementById('menuBackdrop');
-
-    function openMenu(){
-      sideDrawer.classList.add('open');
-      menuBackdrop.classList.add('show');
-      menuToggle.setAttribute('aria-expanded', 'true');
-      sideDrawer.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeMenu(){
-      sideDrawer.classList.remove('open');
-      menuBackdrop.classList.remove('show');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      sideDrawer.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    menuToggle.addEventListener('click', openMenu);
-    menuClose.addEventListener('click', closeMenu);
-    menuBackdrop.addEventListener('click', closeMenu);
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMenu();
-    });
   </script>
 </body>
 </html>
 
-  <script src="./script.js" defer></script>
