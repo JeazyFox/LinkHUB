@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeazy Fox | Link Hub</title>
+  <meta name="description" content="Официальный линк-хаб Jeazy Fox: YouTube, Twitch, Telegram и другие ссылки." />
+  <meta property="og:title" content="Jeazy Fox | Link Hub" />
+  <meta property="og:description" content="Все мои ссылки в одном месте." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://placehold.co/1200x630/png?text=Jeazy+Fox+Link+Hub" />
+  <meta name="theme-color" content="#09090c" />
+
+    <link rel="stylesheet" href="./styles.css" />
+
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-controls="sideDrawer" aria-expanded="false">|||</button>
+
+  <aside class="drawer" id="sideDrawer" aria-hidden="true">
+    <div class="drawer-head">
+      <div class="drawer-title">Меню</div>
+      <button class="drawer-close" id="menuClose" aria-label="Закрыть меню">×</button>
+    </div>
+    <a class="drawer-btn" href="#">Кнопка 1</a>
+    <a class="drawer-btn" href="#">Кнопка 2</a>
+    <a class="drawer-btn" href="#">Кнопка 3</a>
+  </aside>
+
+  <div class="backdrop" id="menuBackdrop"></div>
+
+  <main class="wrap">
+    <section class="profile">
+      <img class="avatar" src="./assets/pic/vatar-main.jpg" alt="Аватар Jeazy Fox" />
+      <div>
+        <h1 class="name">Jeazy Fox</h1>
+        <p class="tag">Контент-мейкер • YouTube / Twitch • Furry</p>
+      </div>
+    </section>
+
+    <p class="bio">
+      Привет! Я Jeazy Fox. Тут собраны все мои основные ссылки: ролики, стримы, соцсети и проекты.
+      Добро пожаловать 🦊
+    </p>
+
+    <section class="links">
+      <a class="link" href="https://www.youtube.com/@JeazyTheFox" target="_blank" rel="noopener noreferrer">
+        <div class="left">
+          <div class="icon">YT</div>
+          <div>
+            <div class="title">YouTube</div>
+            <div class="sub">@JeazyTheFox</div>
+          </div>
+        </div>
+        <div class="arrow">↗</div>
+      </a>
+
+      <a class="link" href="https://www.twitch.tv/jeazy_the_fox" target="_blank" rel="noopener noreferrer">
+        <div class="left">
+          <div class="icon">TW</div>
+          <div>
+            <div class="title">Twitch</div>
+            <div class="sub">Стримы и общение</div>
+          </div>
+        </div>
+        <div class="arrow">↗</div>
+      </a>
+
+      <a class="link" href="https://t.me/jeazy_fox_chanel" target="_blank" rel="noopener noreferrer">
+        <div class="left">
+          <div class="icon">TG</div>
+          <div>
+            <div class="title">Telegram</div>
+            <div class="sub">Новости, анонсы, посты</div>
+          </div>
+        </div>
+        <div class="arrow">↗</div>
+      </a>
+    </section>
+
+    <div class="social">
+      <a class="chip" href="mailto:you@example.com">Почта</a>
+      <a class="chip" href="https://discord.gg/your_invite" target="_blank" rel="noopener noreferrer">Discord</a>
+      <a class="chip" href="https://dalink.to/jeazythefox" target="_blank" rel="noopener noreferrer">Поддержать</a>
+    </div>
+
+    <footer>
+      © <span id="year"></span> Jeazy Fox. All rights reserved.
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const menuToggle = document.getElementById('menuToggle');
+    const menuClose = document.getElementById('menuClose');
+    const sideDrawer = document.getElementById('sideDrawer');
+    const menuBackdrop = document.getElementById('menuBackdrop');
+
+    function openMenu(){
+      sideDrawer.classList.add('open');
+      menuBackdrop.classList.add('show');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      sideDrawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu(){
+      sideDrawer.classList.remove('open');
+      menuBackdrop.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      sideDrawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    menuToggle.addEventListener('click', openMenu);
+    menuClose.addEventListener('click', closeMenu);
+    menuBackdrop.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+  </script>
+</body>
+</html>
+
+  <script src="./script.js" defer></script>
